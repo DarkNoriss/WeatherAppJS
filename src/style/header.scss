@@ -1,0 +1,10 @@
+@import "./variable.scss";
+
+.header {
+  background-color: $headerfooter-bgcolor;
+
+  & h1 {
+    margin: 1rem 2rem;
+    font-size: 4rem;
+  }
+}
