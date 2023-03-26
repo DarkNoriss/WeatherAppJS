@@ -1,7 +1,7 @@
 export const createHeader = () => {
   const headerDiv = document.querySelector(".header");
   const form = document.createElement("form");
-  form.addEventListener("submit", submit);
+  form.classList.add("form-location");
 
   const input = document.createElement("input");
   input.name = "location";
@@ -10,15 +10,11 @@ export const createHeader = () => {
   form.append(input);
 
   const btn = document.createElement("button");
-  btn.classList.add("fa-solid");
-  btn.classList.add("fa-magnifying-glass");
+  const icon = document.createElement("i");
+  icon.classList.add("fa-solid");
+  icon.classList.add("fa-magnifying-glass");
+  btn.append(icon);
   form.append(btn);
 
   headerDiv.append(form);
-};
-
-const submit = (event) => {
-  event.preventDefault();
-  const location = event.target[0].value;
-  console.log(`nice location ${location}`);
 };

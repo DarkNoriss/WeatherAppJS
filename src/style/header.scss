@@ -39,11 +39,8 @@
     & button {
       height: $img-size;
       aspect-ratio: 1/1;
-      background-image: url(../icons/magnifying-glass-solid.svg);
-      background-repeat: no-repeat;
-      background-position: center;
+      font-size: 32px;
       background-color: transparent;
-      background-size: $img-size;
       border: none;
       padding: 0;
       cursor: pointer;

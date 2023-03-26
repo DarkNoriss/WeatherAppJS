@@ -9,8 +9,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: $font-family-sans-serif;
-  display: flex;
-  flex-direction: column;
   color: #fff;
 }
 
@@ -22,11 +20,29 @@ body {
   justify-content: center;
 
   & .app {
-    & .main-icon {
-      background-image: url(../icons/cloud-bolt-solid.svg);
-      background-repeat: no-repeat;
-      background-position: center;
-      background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .location {
+      text-align: center;
+      font-size: 4rem;
+      margin: 0;
+      margin-bottom: 20px;
+    }
+
+    & .icon-current {
+      margin-bottom: 20px;
+      font-size: 200px;
+    }
+
+    & .current-temp {
+      font-size: 4rem;
+      margin-bottom: 20px;
     }
   }
+}
+
+.temp-sign {
+  content: "\00B0";
 }
