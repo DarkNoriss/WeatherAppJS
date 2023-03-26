@@ -1,7 +1,6 @@
 @import "./variable.scss";
 
 .header {
-  width: 100%;
   height: 8rem;
   background-color: $headerfooter-bgcolor;
   display: flex;
@@ -28,7 +27,7 @@
       border: none;
       padding: 0px;
       margin: 0;
-      font-size: 3rem;
+      font-size: 2rem;
       font-weight: bold;
       text-align: center;
 

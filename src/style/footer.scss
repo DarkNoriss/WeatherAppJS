@@ -1,21 +1,27 @@
 @import "./variable.scss";
 
 .footer {
-  width: 100%;
   background-color: $headerfooter-bgcolor;
-  color: #fff;
   display: flex;
   justify-content: center;
-  align-items: center;
   font-size: 1.5rem;
   padding: 0.5rem 0;
 
   & a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: $font-family-sans-serif;
     color: #fff;
     text-decoration: none;
+    gap: 4px;
 
     &:hover {
       color: #ccc;
+    }
+
+    & p {
+      margin: 0;
     }
   }
 }

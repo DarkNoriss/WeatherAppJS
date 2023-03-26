@@ -5,6 +5,7 @@ export const createHeader = () => {
 
   const input = document.createElement("input");
   input.name = "location";
+  input.placeholder = "Search City";
   input.required = true;
   form.append(input);
 
