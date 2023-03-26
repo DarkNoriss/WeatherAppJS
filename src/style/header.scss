@@ -1,10 +1,60 @@
 @import "./variable.scss";
 
-.header {
-  background-color: $headerfooter-bgcolor;
+$img-size: 32px;
 
-  & h1 {
-    margin: 1rem 2rem;
-    font-size: 4rem;
+.header {
+  width: 100%;
+  height: 8rem;
+  background-color: $headerfooter-bgcolor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & form {
+    height: 64px;
+    width: 400px;
+    background-color: #fff;
+    padding: 10px 20px;
+    padding-left: calc(20px + $img-size);
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+
+    &:focus-within {
+      border: 5px solid blue;
+    }
+
+    & input {
+      flex: 1;
+      width: 100%;
+      border: none;
+      padding: 0px;
+      margin: 0;
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    & button {
+      height: $img-size;
+      aspect-ratio: 1/1;
+      background-image: url(../icons/magnifying-glass-solid.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: transparent;
+      background-size: $img-size;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: transform 0.25s ease-in-out;
+
+      &:hover {
+        transform: scale(1.25);
+      }
+    }
   }
 }
