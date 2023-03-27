@@ -11,7 +11,6 @@ export const createFooter = () => {
   )
     .then((response) => response.text())
     .then((svg) => {
-      // insert the SVG into the HTML document
       icon.innerHTML = svg;
     });
   footer.append(icon);

@@ -5,19 +5,16 @@ export const createApp = () => {
   const div = document.createElement("div");
   div.classList.add("app");
 
-  // Text with location
   const location = document.createElement("span");
   location.classList.add("location");
   location.setAttribute("data-location", "");
   div.append(location);
 
-  // Icon with current weather
   const iconCurrent = document.createElement("img");
   iconCurrent.classList.add("current-icon");
   iconCurrent.setAttribute("data-current-icon", "");
   div.append(iconCurrent);
 
-  // Info with current temperature
   const tempCurrent = document.createElement("div");
   tempCurrent.classList.add("current-temp");
 
@@ -31,12 +28,10 @@ export const createApp = () => {
 
   div.append(tempCurrent);
 
-  // Append the div with all the info to mainContainer
   mainContainer.append(div);
 };
 
 export const putDataToApp = (data) => {
-  // console.log(data); // console log data for easy access to all variables
   setLocation(data);
   setCurrent(data);
 };
