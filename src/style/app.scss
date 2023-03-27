@@ -2,7 +2,7 @@
 
 .main-container {
   flex: 1;
-  min-height: calc(100vh - 128px - 37px);
+  min-height: calc(100vh - 100px - 45px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,6 +33,27 @@
     & .current-temp {
       font-size: 4rem;
       margin-bottom: $gap-bottom;
+    }
+  }
+}
+
+@media (max-width: $mobile-width) {
+  .main-container {
+    min-height: calc(100vh - 100px - 36px);
+
+    & .app {
+      & .location {
+        font-size: 3rem;
+      }
+
+      & .current-icon {
+        width: 200px;
+        aspect-ratio: 1/1;
+      }
+
+      & .current-temp {
+        font-size: 3rem;
+      }
     }
   }
 }
