@@ -1,3 +1,5 @@
+let tempSign = "c";
+
 export const createApp = () => {
   const mainContainer = document.querySelector(".main");
   const div = document.createElement("div");
@@ -12,13 +14,11 @@ export const createApp = () => {
 
   // Icon with current weather
 
-  const iconCurrent = document.createElement("i");
-  iconCurrent.classList.add("icon-current");
-  iconCurrent.classList.add("fa-solid");
-  iconCurrent.classList.add("fa-cloud-bolt");
-  iconCurrent.setAttribute("data-icon-current", "");
-  iconCurrent.width = "500";
-  iconCurrent.height = "500";
+  const iconCurrent = document.createElement("div");
+  iconCurrent.classList.add("current-icon");
+  iconCurrent.style =
+    "background-image: url(https://github.com/DarkNoriss/WeatherApp/blob/master/src/icons/night/clear.svg)";
+  iconCurrent.setAttribute("data-current-icon", "");
   div.append(iconCurrent);
 
   // Info with current temperature
@@ -42,4 +42,52 @@ export const createApp = () => {
 
 export const putDataToApp = (data) => {
   console.log(data);
+  setLocation(data);
+  setCurrent(data);
+};
+
+const setLocation = (data) => {
+  const locationName = document.querySelector("[data-location]");
+  return (locationName.innerText = `${data.location.name}`);
+};
+
+const setCurrent = (data) => {
+  // setCurrentIcon(data);
+
+  const currentTemp = document.querySelector("[data-current-temp]");
+  if (tempSign == "c") currentTemp.innerText = `${data.current.temp_c}`;
+  else currentTemp.innerText = `${data.current.temp_f}`;
+};
+
+const setCurrentIcon = (data) => {
+  const localTime = new Date(data.location.localtime);
+  const time = localTime.getHours();
+  const condition = data.current.condition.text;
+  const currentIcon = document.querySelector("[data-current-icon");
+  const iconPng = document.createElement("img");
+  iconPng.src = data.current.condition.icon;
+  currentIcon.append(iconPng);
+  // if (time >= 6 && time < 18) {
+  //   // daytime
+  //   switch (condition) {
+  //     case "Clear":
+  //       break;
+  //     case "Partly cloudy":
+  //       break;
+  //     case "Overcast":
+  //       break;
+  //   }
+  // } else {
+  //   // nighttime
+  //   switch (condition) {
+  //     case "Clear":
+  //       break;
+  //     case "Partly cloudy":
+  //       break;
+  //     case "Overcast":
+  //       break;
+  //     case "Cloudy":
+  //       break;
+  //   }
+  // }
 };

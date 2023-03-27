@@ -31,7 +31,9 @@ body {
       margin-bottom: 20px;
     }
 
-    & .icon-current {
+    & .current-icon {
+      width: 500px;
+      aspect-ratio: 1/1;
       margin-bottom: 20px;
       font-size: 200px;
     }
