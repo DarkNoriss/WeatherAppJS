@@ -2,7 +2,7 @@ const apiKey = "1986480656ec490d950204923202611";
 let weatherConditions;
 
 export const fetchWeatherData = async (location) => {
-  const call = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
+  const call = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`;
   return await makeRequest(call);
 };
 

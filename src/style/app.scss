@@ -23,6 +23,11 @@
       width: 300px;
       aspect-ratio: 1/1;
       margin-bottom: $gap-bottom;
+      display: none;
+    }
+
+    & img[src] {
+      display: block;
     }
 
     & .current-temp {

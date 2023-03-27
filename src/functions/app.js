@@ -11,12 +11,10 @@ export const createApp = () => {
   const location = document.createElement("span");
   location.classList.add("location");
   location.setAttribute("data-location", "");
-  location.innerText = "Poznan";
   div.append(location);
 
   // Icon with current weather
   const iconCurrent = document.createElement("img");
-  iconCurrent.src = "./src/icons/day/113.svg";
   iconCurrent.classList.add("current-icon");
   iconCurrent.setAttribute("data-current-icon", "");
   div.append(iconCurrent);
@@ -27,12 +25,10 @@ export const createApp = () => {
 
   const tempCurrentText = document.createElement("span");
   tempCurrentText.setAttribute("data-current-temp", "");
-  tempCurrentText.innerText = "32";
   tempCurrent.append(tempCurrentText);
 
   const tempCurrentSign = document.createElement("span");
   tempCurrentSign.setAttribute("data-temp-sign", "");
-  tempCurrentSign.innerText = "\u00B0";
   tempCurrent.append(tempCurrentSign);
 
   div.append(tempCurrent);
@@ -56,14 +52,12 @@ const setCurrent = (data) => {
   setCurrentIcon(data);
 
   const currentTemp = document.querySelector("[data-current-temp]");
-
-  if (tempSign == "c") currentTemp.innerText = `${data.current.temp_c}`;
+  if (tempSign == "c") currentTemp.innerText = `${data.current.temp_c}\u00B0`;
   else currentTemp.innerText = `${data.current.temp_f}`;
 };
 
-const setCurrentIcon = (data) => {
-  const dataTime = new Date(data.location.localtime); // create a new Date object from the local time of the location
-  const time = dataTime.getHours(); // get the hour component of the Date object (0-23)
+const setCurrentIcon = async (data) => {
+  const time = data.current.condition.icon; // get day or nigh base on icon url
 
   const conditions = getWeatherConditions(); // get array with weather conditions from the imported JSON file
   const dataCondition = data.current.condition.text; // get the current weather condition
@@ -71,7 +65,7 @@ const setCurrentIcon = (data) => {
   const currentIcon = document.querySelector("[data-current-icon]");
   let iconPath = "";
 
-  if (time > 6 && time < 18) {
+  if (time.includes("day")) {
     // daytime
     conditions.forEach((element) => {
       if (element.day == dataCondition) {
