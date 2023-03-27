@@ -1,50 +1,16 @@
 @import "./header.scss";
+@import "./app.scss";
 @import "./footer.scss";
 @import "./variable.scss";
 
 html {
-  background-color: $default-bg-color;
+  background-color: $bg-color;
+  min-width: 500px;
 }
+
 body {
   margin: 0;
   padding: 0;
   font-family: $font-family-sans-serif;
   color: #fff;
-}
-
-.main {
-  flex: 1;
-  min-height: calc(100vh - 128px - 49px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  & .app {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    & .location {
-      text-align: center;
-      font-size: 4rem;
-      margin: 0;
-      margin-bottom: 20px;
-    }
-
-    & .current-icon {
-      width: 500px;
-      aspect-ratio: 1/1;
-      margin-bottom: 20px;
-      font-size: 200px;
-    }
-
-    & .current-temp {
-      font-size: 4rem;
-      margin-bottom: 20px;
-    }
-  }
-}
-
-.temp-sign {
-  content: "\00B0";
 }

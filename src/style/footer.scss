@@ -1,11 +1,11 @@
 @import "./variable.scss";
 
 .footer {
-  background-color: $headerfooter-bgcolor;
+  background-color: $footer-bgcolor;
   display: flex;
   justify-content: center;
   font-size: 1.5rem;
-  padding: 0.5rem 0;
+  padding: 2px 0;
 
   & a {
     display: flex;
@@ -17,11 +17,22 @@
     gap: 4px;
 
     &:hover {
-      color: #ccc;
+      color: $color-hover;
+      & svg {
+        fill: $color-hover;
+      }
     }
 
     & p {
       margin: 0;
+    }
+
+    & div {
+      display: flex;
+
+      & svg {
+        width: $icon-small;
+      }
     }
   }
 }
