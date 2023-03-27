@@ -5,9 +5,13 @@ export const createFooter = () => {
   footer.href = "https://github.com/DarkNoriss";
   footer.target = "__blank";
 
-  const icon = document.createElement("i");
-  icon.classList.add("fa-brands");
-  icon.classList.add("fa-github");
+  const icon = document.createElement("div");
+  fetch("./src/icons/github.svg")
+    .then((response) => response.text())
+    .then((svg) => {
+      // insert the SVG into the HTML document
+      icon.innerHTML = svg;
+    });
   footer.append(icon);
 
   const text = document.createElement("p");
@@ -16,3 +20,5 @@ export const createFooter = () => {
 
   footerDiv.append(footer);
 };
+
+// fetch the SVG file

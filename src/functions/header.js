@@ -10,9 +10,8 @@ export const createHeader = () => {
   form.append(input);
 
   const btn = document.createElement("button");
-  const icon = document.createElement("i");
-  icon.classList.add("fa-solid");
-  icon.classList.add("fa-magnifying-glass");
+  const icon = document.createElement("img");
+  icon.src = "./src/icons/magnifying-glass.svg";
   btn.append(icon);
   form.append(btn);
 

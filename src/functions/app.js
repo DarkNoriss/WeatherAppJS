@@ -1,7 +1,9 @@
-let tempSign = "c";
+import { getWeatherConditions } from "./weatherData";
+
+const tempSign = "c";
 
 export const createApp = () => {
-  const mainContainer = document.querySelector(".main");
+  const mainContainer = document.querySelector(".main-container");
   const div = document.createElement("div");
   div.classList.add("app");
 
@@ -13,11 +15,9 @@ export const createApp = () => {
   div.append(location);
 
   // Icon with current weather
-
-  const iconCurrent = document.createElement("div");
+  const iconCurrent = document.createElement("img");
+  iconCurrent.src = "./src/icons/day/113.svg";
   iconCurrent.classList.add("current-icon");
-  iconCurrent.style =
-    "background-image: url(https://github.com/DarkNoriss/WeatherApp/blob/master/src/icons/night/clear.svg)";
   iconCurrent.setAttribute("data-current-icon", "");
   div.append(iconCurrent);
 
@@ -34,6 +34,7 @@ export const createApp = () => {
   tempCurrentSign.setAttribute("data-temp-sign", "");
   tempCurrentSign.innerText = "\u00B0";
   tempCurrent.append(tempCurrentSign);
+
   div.append(tempCurrent);
 
   // Append the div with all the info to mainContainer
@@ -48,46 +49,43 @@ export const putDataToApp = (data) => {
 
 const setLocation = (data) => {
   const locationName = document.querySelector("[data-location]");
-  return (locationName.innerText = `${data.location.name}`);
+  locationName.innerText = `${data.location.name}`;
 };
 
 const setCurrent = (data) => {
-  // setCurrentIcon(data);
+  setCurrentIcon(data);
 
   const currentTemp = document.querySelector("[data-current-temp]");
+
   if (tempSign == "c") currentTemp.innerText = `${data.current.temp_c}`;
   else currentTemp.innerText = `${data.current.temp_f}`;
 };
 
 const setCurrentIcon = (data) => {
-  const localTime = new Date(data.location.localtime);
-  const time = localTime.getHours();
-  const condition = data.current.condition.text;
-  const currentIcon = document.querySelector("[data-current-icon");
-  const iconPng = document.createElement("img");
-  iconPng.src = data.current.condition.icon;
-  currentIcon.append(iconPng);
-  // if (time >= 6 && time < 18) {
-  //   // daytime
-  //   switch (condition) {
-  //     case "Clear":
-  //       break;
-  //     case "Partly cloudy":
-  //       break;
-  //     case "Overcast":
-  //       break;
-  //   }
-  // } else {
-  //   // nighttime
-  //   switch (condition) {
-  //     case "Clear":
-  //       break;
-  //     case "Partly cloudy":
-  //       break;
-  //     case "Overcast":
-  //       break;
-  //     case "Cloudy":
-  //       break;
-  //   }
-  // }
+  const dataTime = new Date(data.location.localtime); // create a new Date object from the local time of the location
+  const time = dataTime.getHours(); // get the hour component of the Date object (0-23)
+
+  const conditions = getWeatherConditions(); // get array with weather conditions from the imported JSON file
+  const dataCondition = data.current.condition.text; // get the current weather condition
+
+  const currentIcon = document.querySelector("[data-current-icon]");
+  let iconPath = "";
+
+  if (time > 6 && time < 18) {
+    // daytime
+    conditions.forEach((element) => {
+      if (element.day == dataCondition) {
+        iconPath = `./src/icons/day/${element.icon}.svg`;
+      }
+    });
+  } else {
+    // nighttime
+    conditions.forEach((element) => {
+      if (element.night == dataCondition) {
+        iconPath = `./src/icons/night/${element.icon}.svg`;
+      }
+    });
+  }
+
+  currentIcon.src = iconPath;
 };
