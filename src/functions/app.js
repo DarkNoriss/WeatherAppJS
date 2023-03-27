@@ -1,5 +1,3 @@
-import { getWeatherConditions } from "./weatherData";
-
 const tempSign = "c";
 
 export const createApp = () => {
@@ -56,37 +54,14 @@ const setCurrent = (data) => {
   else currentTemp.innerText = `${data.current.temp_f}`;
 };
 
-const setCurrentIcon = async (data) => {
-  const time = data.current.condition.icon; // get day or nigh base on icon url
-
+const setCurrentIcon = (data) => {
   const condition = data.current.condition;
   const iconText = getIconTime(condition);
   const iconId = getIconId(condition);
-  console.log(iconText, iconId);
-
-  const conditions = getWeatherConditions(); // get array with weather conditions from the imported JSON file
-
-  const dataCondition = data.current.condition.text; // get the current weather condition
 
   const currentIcon = document.querySelector("[data-current-icon]");
-  let iconPath = "";
 
-  if (time.includes("day")) {
-    // daytime
-    conditions.forEach((element) => {
-      if (element.day == dataCondition) {
-        iconPath = `https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/day/${element.icon}.svg`;
-      }
-    });
-  } else {
-    // nighttime
-    conditions.forEach((element) => {
-      if (element.night == dataCondition) {
-        iconPath = `https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/night/${element.icon}.svg`;
-      }
-    });
-  }
-
+  const iconPath = `https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/${iconText}/${iconId}.svg`;
   currentIcon.src = iconPath;
 };
 

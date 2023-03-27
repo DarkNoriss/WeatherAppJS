@@ -2,10 +2,7 @@ import "./style/main.scss";
 import { createHeader } from "./functions/header";
 import { createFooter } from "./functions/footer";
 import { createApp, putDataToApp } from "./functions/app";
-import {
-  fetchWeatherData,
-  importWeatherConditions,
-} from "./functions/weatherData";
+import { fetchWeatherData } from "./functions/weatherData";
 import { getForm } from "./functions/utils/getForm";
 
 window.onload = () => {
@@ -13,7 +10,6 @@ window.onload = () => {
   createApp();
   createFooter();
   getForm().addEventListener("submit", submit);
-  importWeatherConditions();
 };
 
 const submit = async (event) => {
