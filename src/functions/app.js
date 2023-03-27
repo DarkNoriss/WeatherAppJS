@@ -59,7 +59,13 @@ const setCurrent = (data) => {
 const setCurrentIcon = async (data) => {
   const time = data.current.condition.icon; // get day or nigh base on icon url
 
+  const condition = data.current.condition;
+  const iconText = getIconTime(condition);
+  const iconId = getIconId(condition);
+  console.log(iconText, iconId);
+
   const conditions = getWeatherConditions(); // get array with weather conditions from the imported JSON file
+
   const dataCondition = data.current.condition.text; // get the current weather condition
 
   const currentIcon = document.querySelector("[data-current-icon]");
@@ -82,4 +88,15 @@ const setCurrentIcon = async (data) => {
   }
 
   currentIcon.src = iconPath;
+};
+
+const getIconTime = (data) => {
+  const str = data.icon;
+  if (str.includes("day")) return "day";
+  return "night";
+};
+
+const getIconId = (data) => {
+  const str = data.icon;
+  return str.match(/\d+(?=\.png$)/)[0];
 };
