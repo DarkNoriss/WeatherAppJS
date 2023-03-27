@@ -6,7 +6,9 @@ export const createFooter = () => {
   footer.target = "__blank";
 
   const icon = document.createElement("div");
-  fetch("./src/icons/github.svg")
+  fetch(
+    "https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/github.svg"
+  )
     .then((response) => response.text())
     .then((svg) => {
       // insert the SVG into the HTML document

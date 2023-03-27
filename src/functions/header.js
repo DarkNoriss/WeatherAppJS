@@ -11,7 +11,8 @@ export const createHeader = () => {
 
   const btn = document.createElement("button");
   const icon = document.createElement("img");
-  icon.src = "./src/icons/magnifying-glass.svg";
+  icon.src =
+    "https://raw.githubusercontent.com/DarkNoriss/WeatherApp/fc6470583862003d99deee0d062eda33a958368d/src/icons/magnifying-glass.svg";
   btn.append(icon);
   form.append(btn);
 

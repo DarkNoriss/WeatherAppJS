@@ -13,7 +13,9 @@ const makeRequest = async (call) => {
 };
 
 export const importWeatherConditions = async () => {
-  await fetch("./src/weather_conditions.json")
+  await fetch(
+    "https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/weather_conditions.json"
+  )
     .then((response) => response.json())
     .then((data) => {
       weatherConditions = Object.values(data);

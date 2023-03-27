@@ -75,14 +75,14 @@ const setCurrentIcon = (data) => {
     // daytime
     conditions.forEach((element) => {
       if (element.day == dataCondition) {
-        iconPath = `./src/icons/day/${element.icon}.svg`;
+        iconPath = `https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/day/${element.icon}.svg`;
       }
     });
   } else {
     // nighttime
     conditions.forEach((element) => {
       if (element.night == dataCondition) {
-        iconPath = `./src/icons/night/${element.icon}.svg`;
+        iconPath = `https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/night/${element.icon}.svg`;
       }
     });
   }
