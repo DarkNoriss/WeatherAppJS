@@ -36,7 +36,7 @@ export const createApp = () => {
 };
 
 export const putDataToApp = (data) => {
-  console.log(data);
+  // console.log(data); // console log data for easy access to all variables
   setLocation(data);
   setCurrent(data);
 };
@@ -47,22 +47,26 @@ const setLocation = (data) => {
 };
 
 const setCurrent = (data) => {
-  setCurrentIcon(data);
+  const dataCurrent = data.current;
 
-  const currentTemp = document.querySelector("[data-current-temp]");
-  if (tempSign == "c") currentTemp.innerText = `${data.current.temp_c}\u00B0`;
-  else currentTemp.innerText = `${data.current.temp_f}`;
+  setCurrentIcon(dataCurrent);
+  setCurrentTemp(dataCurrent);
 };
 
 const setCurrentIcon = (data) => {
-  const condition = data.current.condition;
+  const condition = data.condition;
   const iconText = getIconTime(condition);
   const iconId = getIconId(condition);
 
   const currentIcon = document.querySelector("[data-current-icon]");
+  currentIcon.src = `https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/${iconText}/${iconId}.svg`;
+};
 
-  const iconPath = `https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/${iconText}/${iconId}.svg`;
-  currentIcon.src = iconPath;
+const setCurrentTemp = (data) => {
+  const currentTemp = document.querySelector("[data-current-temp]");
+
+  if (tempSign == "c") return (currentTemp.innerText = `${data.temp_c}\u00B0`);
+  return (currentTemp.innerText = `${data.temp_f}\u2109`);
 };
 
 const getIconTime = (data) => {
