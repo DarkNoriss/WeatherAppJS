@@ -1,3 +1,5 @@
+import { PATH } from "../constants/constants";
+
 const tempSign = "c";
 
 export const createApp = () => {
@@ -54,7 +56,7 @@ const setCurrentIcon = (data) => {
   const iconId = getIconId(condition);
 
   const currentIcon = document.querySelector("[data-current-icon]");
-  currentIcon.src = `https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/${iconTime}/${iconId}.svg`;
+  currentIcon.src = `${PATH}icons/${iconTime}/${iconId}.svg`;
 
   setBg(iconTime);
 };
@@ -79,6 +81,7 @@ const getIconId = (data) => {
 
 const setBg = (time) => {
   const body = document.querySelector("body");
+
   body.classList = "";
   body.classList.add(`${time}`);
 };

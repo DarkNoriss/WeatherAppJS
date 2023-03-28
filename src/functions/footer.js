@@ -1,3 +1,5 @@
+import { PATH } from "../constants/constants";
+
 export const createFooter = () => {
   const footerDiv = document.querySelector(".footer");
 
