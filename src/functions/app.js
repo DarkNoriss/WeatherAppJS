@@ -10,33 +10,47 @@ export const createApp = () => {
   const div = document.createElement("div");
   div.classList.add("app");
 
-  const location = document.createElement("span");
-  location.classList.add("location");
-  location.setAttribute("data-location", "");
-  div.append(location);
+  div.append(createCurrentLocation());
 
-  const iconCurrent = document.createElement("img");
-  iconCurrent.classList.add("current-icon");
-  iconCurrent.setAttribute("data-current-icon", "");
-  div.append(iconCurrent);
+  div.append(createCurrentIcon());
 
-  const tempCurrent = document.createElement("div");
-  tempCurrent.classList.add("current-temp");
-
-  const tempCurrentText = document.createElement("span");
-  tempCurrentText.setAttribute("data-current-temp", "");
-  tempCurrent.append(tempCurrentText);
-
-  const tempCurrentSign = document.createElement("span");
-  tempCurrentSign.setAttribute("data-temp-sign", "");
-  tempCurrent.append(tempCurrentSign);
-
-  div.append(tempCurrent);
+  div.append(createCurrentTemp());
 
   mainContainer.append(div);
 };
 
+const createCurrentLocation = () => {
+  const location = document.createElement("span");
+  location.classList.add("location");
+  location.setAttribute("data-location", "");
+  return location;
+};
+
+const createCurrentIcon = () => {
+  const icon = document.createElement("img");
+  icon.classList.add("current-icon");
+  icon.setAttribute("data-current-icon", "");
+  return icon;
+};
+
+const createCurrentTemp = () => {
+  const tempCont = document.createElement("div");
+  tempCont.classList.add("current-temp");
+
+  const tempText = document.createElement("span");
+  tempText.setAttribute("data-current-temp", "");
+  tempCont.append(tempText);
+
+  const tempDesc = document.createElement("span");
+  tempDesc.classList.add("current-temp-desc");
+  tempDesc.setAttribute("data-current-temp-desc", "");
+  tempCont.append(tempDesc);
+
+  return tempCont;
+};
+
 export const putDataToApp = (data) => {
+  console.log(data); // console.log for feature
   setLocation(data);
   setCurrent(data);
 };
@@ -51,10 +65,12 @@ const setCurrent = (data) => {
 
   setCurrentIcon(dataCurrent);
   setCurrentTemp(dataCurrent);
+  setCurrentTempDesc(dataCurrent);
 };
 
 const setCurrentIcon = (data) => {
   const condition = data.condition;
+
   const iconTime = getIconTime(condition);
   const iconId = getIconId(condition);
 
@@ -71,8 +87,16 @@ const setCurrentTemp = (data) => {
   return (currentTemp.innerText = `${data.temp_f}\u2109`);
 };
 
+const setCurrentTempDesc = (data) => {
+  const dataDesc = data.condition.text;
+
+  const currentTempDesc = document.querySelector("[data-current-temp-desc]");
+  currentTempDesc.innerText = `${dataDesc}`;
+};
+
 const getIconTime = (data) => {
   const str = data.icon;
+
   if (str.includes("day")) return "day";
   return "night";
 };
