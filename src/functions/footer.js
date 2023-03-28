@@ -4,7 +4,7 @@ export const createFooter = () => {
   const footer = document.querySelector(".footer");
 
   const link = createLink();
-  return footer.append(link);
+  footer.append(link);
 };
 
 const createLink = () => {

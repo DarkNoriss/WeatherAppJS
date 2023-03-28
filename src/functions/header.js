@@ -4,7 +4,7 @@ export const createHeader = () => {
   const headerDiv = document.querySelector(".header");
 
   const form = createForm();
-  return headerDiv.append(form);
+  headerDiv.append(form);
 };
 
 const createForm = () => {
