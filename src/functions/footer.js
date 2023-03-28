@@ -1,4 +1,4 @@
-import { PATH } from "../constants/constants";
+import { PATHICONS } from "../constants/constants";
 
 export const createFooter = () => {
   const footerDiv = document.querySelector(".footer");
@@ -7,14 +7,8 @@ export const createFooter = () => {
   footer.href = "https://github.com/DarkNoriss";
   footer.target = "__blank";
 
-  const icon = document.createElement("div");
-  fetch(
-    "https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/github.svg"
-  )
-    .then((response) => response.text())
-    .then((svg) => {
-      icon.innerHTML = svg;
-    });
+  const icon = document.createElement("img");
+  icon.src = `${PATHICONS}github.svg`;
   footer.append(icon);
 
   const text = document.createElement("p");
@@ -23,5 +17,3 @@ export const createFooter = () => {
 
   footerDiv.append(footer);
 };
-
-// fetch the SVG file

@@ -1,4 +1,4 @@
-import { PATH } from "../constants/constants";
+import { PATHICONS } from "../constants/constants";
 
 const tempSign = "c";
 
@@ -56,7 +56,7 @@ const setCurrentIcon = (data) => {
   const iconId = getIconId(condition);
 
   const currentIcon = document.querySelector("[data-current-icon]");
-  currentIcon.src = `${PATH}icons/${iconTime}/${iconId}.svg`;
+  currentIcon.src = `${PATHICONS}${iconTime}/${iconId}.svg`;
 
   setBg(iconTime);
 };

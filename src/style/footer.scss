@@ -18,22 +18,15 @@
     padding: 4px;
 
     &:hover {
-      color: $color-hover;
-      & svg {
-        fill: $color-hover;
-      }
+      filter: brightness(75%);
     }
 
     & p {
       margin: 0;
     }
 
-    & div {
-      display: flex;
-
-      & svg {
-        width: $icon-small;
-      }
+    & img {
+      width: $icon-small;
     }
   }
 }
