@@ -1,6 +1,9 @@
 import { PATHICONS } from "../constants/constants";
+import { getId, getTime } from "./utils/gets";
 
-const tempSign = "c";
+let tempC = true;
+const signC = "\u00B0";
+const signF = "\u2109";
 
 export const createApp = () => {
   // set the default bg to daytime
@@ -9,20 +12,28 @@ export const createApp = () => {
   const mainContainer = document.querySelector(".main-container");
   const div = document.createElement("div");
   div.classList.add("app");
+  div.style.display = "none";
 
-  div.append(createCurrentLocation());
+  const location = createLocation();
+  div.append(location);
 
-  div.append(createCurrentIcon());
+  const currentIcon = createCurrentIcon();
+  div.append(currentIcon);
 
-  div.append(createCurrentTemp());
+  const currentTemp = createCurrentTemp();
+  div.append(currentTemp);
+
+  const forecast = createForecast();
+  div.append(forecast);
 
   mainContainer.append(div);
 };
 
-const createCurrentLocation = () => {
+const createLocation = () => {
   const location = document.createElement("span");
   location.classList.add("location");
   location.setAttribute("data-location", "");
+
   return location;
 };
 
@@ -30,6 +41,7 @@ const createCurrentIcon = () => {
   const icon = document.createElement("img");
   icon.classList.add("current-icon");
   icon.setAttribute("data-current-icon", "");
+
   return icon;
 };
 
@@ -49,15 +61,52 @@ const createCurrentTemp = () => {
   return tempCont;
 };
 
+const createForecast = () => {
+  const container = document.createElement("div");
+  container.classList.add("forecast");
+
+  const dayOne = createForecastDay("0");
+  container.append(dayOne);
+
+  const dayTwo = createForecastDay("1");
+  container.append(dayTwo);
+
+  const dayThree = createForecastDay("2");
+  container.append(dayThree);
+
+  return container;
+};
+
+const createForecastDay = (index) => {
+  const container = document.createElement("div");
+  container.classList.add("day");
+
+  const day = document.createElement("span");
+  day.setAttribute(`data-forecast-day${index}`, "");
+  container.append(day);
+
+  const icon = document.createElement("img");
+  icon.setAttribute(`data-forecast-icon${index}`, "");
+  container.append(icon);
+
+  const temp = document.createElement("span");
+  temp.setAttribute(`data-forecast-temp${index}`, "");
+  container.append(temp);
+
+  return container;
+};
+
 export const putDataToApp = (data) => {
-  console.log(data); // console.log for feature
+  // console.log(data); // console.log for feature
   setLocation(data);
   setCurrent(data);
+  setForecast(data);
+  showApp();
 };
 
 const setLocation = (data) => {
-  const locationName = document.querySelector("[data-location]");
-  locationName.innerText = `${data.location.name}`;
+  const location = document.querySelector("[data-location]");
+  location.innerText = `${data.location.name}`;
 };
 
 const setCurrent = (data) => {
@@ -70,9 +119,10 @@ const setCurrent = (data) => {
 
 const setCurrentIcon = (data) => {
   const condition = data.condition;
+  const icon = condition.icon;
 
-  const iconTime = getIconTime(condition);
-  const iconId = getIconId(condition);
+  const iconTime = getTime(icon);
+  const iconId = getId(icon);
 
   const currentIcon = document.querySelector("[data-current-icon]");
   currentIcon.src = `${PATHICONS}${iconTime}/${iconId}.svg`;
@@ -81,10 +131,11 @@ const setCurrentIcon = (data) => {
 };
 
 const setCurrentTemp = (data) => {
-  const currentTemp = document.querySelector("[data-current-temp]");
+  const dataTemp = tempC ? data.temp_c : data.temp_f;
+  const sign = tempC ? signC : signF;
 
-  if (tempSign == "c") return (currentTemp.innerText = `${data.temp_c}\u00B0`);
-  return (currentTemp.innerText = `${data.temp_f}\u2109`);
+  const currentTemp = document.querySelector("[data-current-temp]");
+  currentTemp.innerText = `${dataTemp}${sign}`;
 };
 
 const setCurrentTempDesc = (data) => {
@@ -94,16 +145,30 @@ const setCurrentTempDesc = (data) => {
   currentTempDesc.innerText = `${dataDesc}`;
 };
 
-const getIconTime = (data) => {
-  const str = data.icon;
+const setForecast = (data) => {
+  const forecast = data.forecast.forecastday;
 
-  if (str.includes("day")) return "day";
-  return "night";
-};
+  forecast.forEach((element, index) => {
+    const date = element.date;
+    const options = { day: "2-digit", month: "2-digit" };
+    const formattedDate = new Date(date).toLocaleDateString("en-GB", options);
 
-const getIconId = (data) => {
-  const str = data.icon;
-  return str.match(/\d+(?=\.png$)/)[0];
+    const dataIcon = element.day.condition.icon;
+    const iconTime = getTime(dataIcon);
+    const iconId = getId(dataIcon);
+
+    const dataTemp = tempC ? element.day.avgtemp_c : element.day.avgtemp_f;
+    const sign = tempC ? signC : signF;
+
+    const day = document.querySelector(`[data-forecast-day${index}]`);
+    day.innerText = formattedDate;
+
+    const icon = document.querySelector(`[data-forecast-icon${index}]`);
+    icon.src = `${PATHICONS}${iconTime}/${iconId}.svg`;
+
+    const temp = document.querySelector(`[data-forecast-temp${index}]`);
+    temp.innerText = `${dataTemp}${sign}`;
+  });
 };
 
 const setBg = (time) => {
@@ -112,3 +177,5 @@ const setBg = (time) => {
   body.classList = "";
   body.classList.add(`${time}`);
 };
+
+const showApp = () => (document.querySelector(".app").style.display = "");

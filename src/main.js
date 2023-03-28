@@ -3,7 +3,7 @@ import { createHeader } from "./functions/header";
 import { createFooter } from "./functions/footer";
 import { createApp, putDataToApp } from "./functions/app";
 import { fetchWeatherData } from "./functions/weatherData";
-import { getForm } from "./functions/utils/getForm";
+import { getForm } from "./functions/utils/gets";
 
 window.onload = () => {
   createHeader();
