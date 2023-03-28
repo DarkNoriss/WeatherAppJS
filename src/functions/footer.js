@@ -1,19 +1,36 @@
 import { PATHICONS } from "../constants/constants";
 
 export const createFooter = () => {
-  const footerDiv = document.querySelector(".footer");
+  const footer = document.querySelector(".footer");
 
-  const footer = document.createElement("a");
-  footer.href = "https://github.com/DarkNoriss";
-  footer.target = "__blank";
+  const link = createLink();
+  return footer.append(link);
+};
 
+const createLink = () => {
+  const link = document.createElement("a");
+  link.href = "https://github.com/DarkNoriss";
+  link.target = "__blank";
+
+  const img = createImg();
+  link.append(img);
+
+  const text = createText();
+  link.append(text);
+
+  return link;
+};
+
+const createImg = () => {
   const icon = document.createElement("img");
   icon.src = `${PATHICONS}github.svg`;
-  footer.append(icon);
 
+  return icon;
+};
+
+const createText = () => {
   const text = document.createElement("p");
   text.innerText = "DarkNoriss";
-  footer.append(text);
 
-  footerDiv.append(footer);
+  return text;
 };
