@@ -50,11 +50,13 @@ const setCurrent = (data) => {
 
 const setCurrentIcon = (data) => {
   const condition = data.condition;
-  const iconText = getIconTime(condition);
+  const iconTime = getIconTime(condition);
   const iconId = getIconId(condition);
 
   const currentIcon = document.querySelector("[data-current-icon]");
-  currentIcon.src = `https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/${iconText}/${iconId}.svg`;
+  currentIcon.src = `https://raw.githubusercontent.com/DarkNoriss/WeatherApp/master/src/icons/${iconTime}/${iconId}.svg`;
+
+  setBg(iconTime);
 };
 
 const setCurrentTemp = (data) => {
@@ -73,4 +75,10 @@ const getIconTime = (data) => {
 const getIconId = (data) => {
   const str = data.icon;
   return str.match(/\d+(?=\.png$)/)[0];
+};
+
+const setBg = (time) => {
+  const body = document.querySelector("body");
+  body.classList = "";
+  body.classList.add(`${time}`);
 };
