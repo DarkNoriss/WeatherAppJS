@@ -1,7 +1,7 @@
 @import "./variable.scss";
 
 .header {
-  height: 100px;
+  height: $size-desktop;
   background-color: transparent;
   display: flex;
   align-items: center;
@@ -49,6 +49,7 @@
 
 @media (max-width: $mobile-width) {
   .header {
+    height: $size-mobile;
     max-width: 80vw;
     margin: auto;
 

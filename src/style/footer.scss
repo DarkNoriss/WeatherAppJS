@@ -36,10 +36,8 @@
     font-size: 1rem;
 
     & a {
-      & div {
-        & svg {
-          width: $icon-small-mobile;
-        }
+      & img {
+        width: $icon-small-mobile;
       }
     }
   }
