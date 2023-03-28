@@ -3,6 +3,9 @@ import { PATHICONS } from "../constants/constants";
 const tempSign = "c";
 
 export const createApp = () => {
+  // set the default bg to daytime
+  setBg("day");
+
   const mainContainer = document.querySelector(".main-container");
   const div = document.createElement("div");
   div.classList.add("app");
